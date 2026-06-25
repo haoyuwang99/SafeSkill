@@ -52,15 +52,3 @@ SafeClaw/
 * Step 3 - Prioritise the Safety Skills in the System Prompt.
 
 ---
-If you find this repository helpful, please cite:
-```bibtex
-@misc{wang2026safeclawrsafesecuremultiagent,
-      title={SafeClaw-R: Towards Safe and Secure Multi-Agent Personal Assistants}, 
-      author={Haoyu Wang and Zibo Xiao and Yedi Zhang and Christopher M. Poskitt and Jun Sun},
-      year={2026},
-      eprint={2603.28807},
-      archivePrefix={arXiv},
-      primaryClass={cs.CR},
-      url={https://arxiv.org/abs/2603.28807}, 
-}
-```
