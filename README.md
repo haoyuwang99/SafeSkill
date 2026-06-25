@@ -1,6 +1,5 @@
-# SafeClaw — Safety Layer for OpenClaw Agent Skills
-
-This is the repository for [SafeClaw-R: Towards Safe and Secure Multi-Agent Personal Assistants](https://arxiv.org/html/2603.28807v1).
+# SafeSkill — Safety Layer for Skill-based Agents
+ 
 We formulates safety in multi-agent systems as a runtime enforcement problem — safety policies are applied during execution, not discovered after the fact. SafeClaw-R is the reference implementation: a multi-agent framework that embeds enforcement agent nodes directly into the OpenClaw execution pipeline, enabling consistent, real-time mediation of agent actions against declarative safety policies. This repo also introduces the Safe Skill Factory, a methodology for systematically deriving and refining enforcement policies, and SafeSkillHub for sharing reusable safety specifications across teams. We evaluate SafeClaw-R across three real-world attack surfaces — Google Workspace abuse, malicious third-party skills, and dangerous code execution — demonstrating strong enforcement effectiveness with low false-positive rates.
 
 ## We welcome contributions that maintain, extend, or propose new safety skills — if you've encountered a threat pattern in the wild, open a PR to SafeSkillHub and help the community stay ahead of it.
@@ -10,7 +9,7 @@ We formulates safety in multi-agent systems as a runtime enforcement problem —
 ## Directory Structure
 
 ```
-SafeClaw/
+SafeSkill/
 ├── system-prompt/
 │   └── AGENTS.md               # OpenClaw system prompt with L0 safety routing table
 │
