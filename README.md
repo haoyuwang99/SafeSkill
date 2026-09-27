@@ -15,7 +15,7 @@ SafeSkill/
 │
 │── risk-assessment/            # A preliminary risk analysis for OpenClaw built-in skills.
 │
-│── safes-kill-factory/         # meta skill that automatically generate safe counterpart for a given skill
+│── safe-skill-factory/         # meta skill that automatically generate safe counterpart for a given skill
 │
 ├── scenarios/                  # Evaluation
 │   ├── google-workspace/       # Scenario 1: safe-gog (20 risk types, 1,971 cases)
@@ -30,11 +30,16 @@ SafeSkill/
 │   │   ├── harness/            # (audit scripts)
 │   │   └── results/            # audited-no-failures-complete.json, benchmark-results-full.json
 │   │
-│   └── code-execution/         # Scenario 3: safe-exec (2,028 cases)
-│       ├── skill/SKILL.md      # The safe-exec skill under evaluation
-│       ├── testcases/seeds/    # T01-T08, B01-B10, M01-M10 seed scripts
-│       ├── harness/            # (mutation generator)
-│       └── results/            # dataset.md + mutations/ (per-family analysis)
+│   ├── code-execution/         # Scenario 3: safe-exec (2,028 cases)
+│   │   ├── skill/SKILL.md      # The safe-exec skill under evaluation
+│   │   ├── testcases/seeds/    # T01-T08, B01-B10, M01-M10 seed scripts
+│   │   ├── testcases/mutations/ # 100 cosmetic mutants per B/M seed (+ manifest.json)
+│   │   ├── harness/            # mutate.py (mutation generator) + regex_baseline.py
+│   │   └── results/            # dataset.md + mutations/ (per-family analysis), regex baseline results
+│   │
+│   └── claude-code/            # Scenario 4: SafeSkill hosted in Claude Code (generalizability)
+│       ├── harness/            # run_cc.py (SafeSkill vs vanilla) + followup.py (two-turn confirmation)
+│       └── results/            # per-case JSONL, summary.json
 │
 └── safeskillhub/               # safety skill library
     │── safe-gog
