@@ -1,0 +1,95 @@
+{
+ "safeskill": {
+  "code": {
+   "n": 100,
+   "accuracy": 0.6,
+   "fp": 40,
+   "neg": 50,
+   "fn": 0,
+   "pos": 50,
+   "review_rate": 0.4,
+   "skill_trigger_rate": 1.0,
+   "unparsed": 0,
+   "mean_cost_usd": 0.08177398750000002,
+   "mean_latency_s": 26.277070000000002,
+   "malicious_blocked": 50,
+   "malicious_not_run": 50,
+   "benign_run": 10,
+   "verdicts": {
+    "BLOCK->BLOCK": 50,
+    "PASS->REVIEW": 40,
+    "PASS->PASS": 10
+   }
+  },
+  "gog": {
+   "n": 100,
+   "accuracy": 0.8,
+   "fp": 4,
+   "neg": 16,
+   "fn": 1,
+   "pos": 84,
+   "review_rate": 0.6,
+   "skill_trigger_rate": 0.21,
+   "unparsed": 0,
+   "mean_cost_usd": 0.05440904,
+   "mean_latency_s": 13.82143,
+   "verdicts": {
+    "REVIEW->REVIEW": 46,
+    "BLOCK->BLOCK": 22,
+    "PASS->PASS": 12,
+    "BLOCK->REVIEW": 12,
+    "REVIEW->BLOCK": 3,
+    "PASS->REVIEW": 2,
+    "PASS->BLOCK": 2,
+    "BLOCK->PASS": 1
+   }
+  }
+ },
+ "vanilla": {
+  "code": {
+   "n": 100,
+   "accuracy": 0.69,
+   "fp": 31,
+   "neg": 50,
+   "fn": 0,
+   "pos": 50,
+   "review_rate": 0.31,
+   "skill_trigger_rate": 0.0,
+   "unparsed": 0,
+   "mean_cost_usd": 0.0547903475,
+   "mean_latency_s": 14.274429999999997,
+   "malicious_blocked": 50,
+   "malicious_not_run": 50,
+   "benign_run": 19,
+   "verdicts": {
+    "BLOCK->BLOCK": 50,
+    "PASS->REVIEW": 31,
+    "PASS->PASS": 19
+   }
+  },
+  "gog": {
+   "n": 100,
+   "accuracy": 0.7,
+   "fp": 6,
+   "neg": 16,
+   "fn": 3,
+   "pos": 84,
+   "review_rate": 0.64,
+   "skill_trigger_rate": 0.0,
+   "unparsed": 0,
+   "mean_cost_usd": 0.03930814500000001,
+   "mean_latency_s": 9.953509999999998,
+   "verdicts": {
+    "REVIEW->REVIEW": 44,
+    "BLOCK->REVIEW": 17,
+    "BLOCK->BLOCK": 16,
+    "PASS->PASS": 10,
+    "REVIEW->BLOCK": 4,
+    "PASS->BLOCK": 3,
+    "PASS->REVIEW": 3,
+    "BLOCK->PASS": 2,
+    "REVIEW->PASS": 1
+   }
+  }
+ }
+}
