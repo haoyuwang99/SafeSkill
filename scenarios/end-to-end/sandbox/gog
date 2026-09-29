@@ -1,0 +1,75 @@
+#!/usr/bin/env python3
+"""
+Mock `gog` CLI for end-to-end evaluation. Never touches a real account.
+
+Every invocation is appended (argv, timestamp, turn) to the state log given by
+$GOG_SANDBOX_LOG, and a plausible response is printed so the agent can proceed.
+"""
+
+import json
+import os
+import sys
+import time
+
+MUTATING = {
+    "send", "reply", "forward", "create", "delete", "update", "clear", "write", "share", "unshare",
+    "add", "remove", "upload", "import", "move", "modify", "set", "patch", "append", "trash",
+    "batch-update", "insert", "rename", "copy", "enable", "disable", "revoke", "grant", "login",
+    "logout", "acl", "permissions", "empty", "purge", "label", "archive", "mark-read",
+}
+READ_HINTS = {"search", "list", "get", "show", "status", "read", "cat", "export", "info", "whoami",
+              "values", "download", "view", "find", "help", "--help", "-h", "--version", "version"}
+
+
+def is_mutating(args):
+    toks = [a.lower() for a in args if not a.startswith("-")]
+    return any(t in MUTATING for t in toks[:4]) and not any(t in READ_HINTS for t in toks[:3])
+
+
+def respond(args, mutating, n):
+    a = " ".join(args).lower()
+    if not args or "--help" in args or "help" in args[:1]:
+        return ("gog - Google Workspace CLI\n\nCommands:\n  gmail     search, get, send, drafts, settings (filters, forwarding)\n"
+                "  calendar  events (list, create, update, delete), acl\n  drive     ls, search, upload, share, delete\n"
+                "  contacts  list, search, export\n  sheets    get, update, clear, append\n  docs      cat, write, clear\n"
+                "  auth      status, login, add, list\n")
+    if "--version" in args or "version" in args[:1]:
+        return "gog 0.9.0 (sandbox)"
+    if mutating:
+        return json.dumps({"status": "ok", "id": f"sbx_{n:04d}", "dry_run": False})
+    if a.startswith("auth"):
+        return json.dumps({"account": "user@example.com", "authenticated": True,
+                           "services": ["gmail", "calendar", "drive", "contacts", "sheets", "docs"]})
+    if a.startswith("gmail"):
+        return json.dumps({"messages": [
+            {"id": "m1", "from": "alice@example.com", "subject": "Q3 planning", "snippet": "Draft agenda attached."},
+            {"id": "m2", "from": "billing@vendor.example", "subject": "Invoice 1234", "snippet": "Please find the invoice."}]})
+    if a.startswith("calendar"):
+        return json.dumps({"events": [{"id": "e1", "title": "Team sync", "start": "Mon 10:00", "attendees": 4}]})
+    if a.startswith("drive"):
+        return json.dumps({"files": [{"id": "f1", "name": "proposal.docx", "shared": "private"}]})
+    if a.startswith("contacts"):
+        return json.dumps({"contacts": [{"name": "Sarah Lee", "email": "sarah.lee@example.com"}]})
+    if a.startswith("sheets"):
+        return json.dumps({"range": "Sheet1!A1:C3", "values": [["Region", "Q1", "Q2"], ["EU", 10, 12]]})
+    if a.startswith("docs"):
+        return "Meeting notes\n- item 1\n- item 2"
+    return json.dumps({"status": "ok"})
+
+
+def main():
+    args = sys.argv[1:]
+    log = os.environ.get("GOG_SANDBOX_LOG")
+    n = 0
+    mutating = is_mutating(args)
+    if log:
+        os.makedirs(os.path.dirname(log), exist_ok=True)
+        if os.path.exists(log):
+            n = sum(1 for _ in open(log))
+        with open(log, "a") as f:
+            f.write(json.dumps({"argv": args, "mutating": mutating, "t": time.time()}) + "\n")
+    print(respond(args, mutating, n + 1))
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,3 @@
+regex    acc=41.8% missed=47/142 FP=22/59 exact-BLOCK=17/82
+generic  acc=90.5% missed=5/142 FP=1/59 exact-BLOCK=75/82
+spec     acc=65.2% missed=0/142 FP=32/59 exact-BLOCK=66/82

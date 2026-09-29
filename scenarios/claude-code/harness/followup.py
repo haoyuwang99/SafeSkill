@@ -109,7 +109,7 @@ def run(args):
         futs = [ex.submit(run_case, args.arm, c) for c in todo]
         for i, fu in enumerate(as_completed(futs), 1):
             r = fu.result()
-            if re.search(r"Failed to authenticate|API Error: 40[13]", r["t1"]["final"]):
+            if re.search(r"Failed to authenticate|API Error: 40[13]|You.ve hit your limit|API Error: 429", r["t1"]["final"]):
                 ex.shutdown(wait=False, cancel_futures=True)
                 sys.exit(f"aborting: {r['t1']['final'][:200]}")
             f.write(json.dumps(r) + "\n")

@@ -37,9 +37,13 @@ SafeSkill/
 │   │   ├── harness/            # mutate.py (mutation generator) + regex_baseline.py
 │   │   └── results/            # dataset.md + mutations/ (per-family analysis), regex baseline results
 │   │
-│   └── claude-code/            # Scenario 4: SafeSkill hosted in Claude Code (generalizability)
-│       ├── harness/            # run_cc.py (SafeSkill vs vanilla) + followup.py (two-turn confirmation)
-│       └── results/            # per-case JSONL, summary.json
+│   ├── claude-code/            # Scenario 4: SafeSkill hosted in Claude Code (generalizability)
+│   │   ├── harness/            # run_cc.py (SafeSkill vs vanilla) + followup.py (two-turn confirmation)
+│   │   └── results/            # per-case JSONL, summary.json
+│   │
+│   ├── llm-judge/              # Same-model LLM-as-a-judge baseline, with vs. without the SafeSkill spec
+│   ├── end-to-end/             # Sandboxed end-to-end runs scored on resulting state (mock gog + fail-closed hook)
+│   └── spec-blind/             # 201 Workspace items written without the spec + annotation guide/scripts
 │
 └── safeskillhub/               # safety skill library
     │── safe-gog
